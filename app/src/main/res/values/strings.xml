@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Coin Tracker</string>
+    <string name="willkomen_titel">Willkomen zurück!</string>
+    <string name="willkomen_stand">Derzeitiger Stand:</string>
+    <string name="willkommen_fear_and_greed">Fear And Greed Index:</string>
+    <string name="willkommen_bitcoin_input">Bitcoin Warnung:</string>
+    <string name="willkommen_warnung_bearbeiten">Warnung bearbeiten</string>
+    <string name="krypto_notification_position_hint">gewünschte Bitcoin Position</string>
+    <string name="krypto_notification_tracken_beenden">Warnung deaktivieren</string>
+    <string name="krypto_notification_warnung_aktivieren">Warnung aktivieren</string>
+    <string name="einstellungen_preiseingabe_titel">Preiseingabe</string>
+    <string name="einstellungen_preiseingabe_beschreibung">Preise in ... eingeben</string>
+    <string name="einstellungen_musik_titel">Musik</string>
+    <string name="einstellungen_musik_beschreibung">Erinnerungsmusik an</string>
+    <string name="einstellungen_muten">Erinnerungsmusik</string>
+    <string name="einstellungen_checkbox_musik_an">Musik an</string>
+    <string name="einstellungen_uebernehmen_button">Änderungen übernehmen</string>
+    <string-array name="einstellungen_price_options">
+        <item>USD ($)</item>
+        <item>Prozent (%)</item>
+    </string-array>
+    <string-array name="einstellungen_price_options_up_down">
+        <item>Pump</item>
+        <item>Dip</item>
+    </string-array>
+    <string name="action_help">Hilfe</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="loading_message">Einen Moment noch...</string>
+</resources>
