@@ -1,6 +1,5 @@
 package de.ion.coinTrackerApp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
-import de.ion.coinTrackerApp.database.DatabaseSettingsHelper;
+import de.ion.coinTrackerApp.database.DatabaseSettingsRepository;
+import de.ion.coinTrackerApp.database.SQLiteSettingsRepository;
 import de.ion.coinTrackerApp.settings.PriceOptionSpinner;
-import de.ion.coinTrackerApp.settings.valueObject.SettingsData;
+import de.ion.coinTrackerApp.settings.frontend.SettingsAlert;
 import de.ion.coinTrackerApp.settings.singleton.SettingsSingleton;
+import de.ion.coinTrackerApp.settings.valueObject.SettingsData;
 
 public class SettingsActivity extends AppCompatActivity implements Activity {
     private ImageView toolbarBitcoinImg;
@@ -31,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
     private Spinner settingsPriceOptions;
     private Button saveChangesBtn;
 
-    private DatabaseSettingsHelper databaseSettingsHelper;
+    private DatabaseSettingsRepository sqLiteSettingsRepository;
 
     private HashMap<String, String> currentSettings;
 
@@ -50,26 +51,19 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
             public void run() {
                 while (true) {
                     try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (isMutingCheckbox.isChecked()) {
-                                    settingsMusicLabel.setText("Erinnerungsmusik an");
-                                    settingsVolumeImg.setImageResource(R.drawable.ic_volume_up);
-                                } else {
-                                    settingsMusicLabel.setText("Erinnerungsmusik aus");
-                                    settingsVolumeImg.setImageResource(R.drawable.ic_volume_mute);
-                                }
+                        runOnUiThread(() -> {
+                            if (isMutingCheckbox.isChecked()) {
+                                settingsMusicLabel.setText("Erinnerungsmusik aus");
+                                settingsVolumeImg.setImageResource(R.drawable.ic_volume_mute);
+                            }
 
-                                if (String.valueOf(isMutingCheckbox.isChecked()).equals(currentSettings.get("muting")) ||
-                                        !String.valueOf(settingsPriceOptions.getSelectedItem()).equals(currentSettings.get("priceOptions"))) {
-                                    saveChangesBtn.setEnabled(true);
-                                } else if (!String.valueOf(isMutingCheckbox.isChecked()).equals(currentSettings.get("muting")) &&
-                                        String.valueOf(settingsPriceOptions.getSelectedItem()).equals(currentSettings.get("priceOptions"))) {
-                                    saveChangesBtn.setEnabled(false);
-                                }
+                            saveChangesBtn.setEnabled(false);
+                            if (!String.valueOf(isMutingCheckbox.isChecked()).equals(currentSettings.get(SQLiteSettingsRepository.COL_IS_MUTING)) ||
+                                    !String.valueOf(settingsPriceOptions.getSelectedItem()).equals(currentSettings.get(SQLiteSettingsRepository.COL_PRICE_OPTION))) {
+                                saveChangesBtn.setEnabled(true);
                             }
                         });
+
                         Thread.sleep(300);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -83,18 +77,10 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
         Intent mainActivityIntent = new Intent(this, MainActivity.class);
         if (saveChangesBtn.isEnabled()) {
             AlertDialog.Builder alertUserSaveChanges = new AlertDialog.Builder(this);
-            alertUserSaveChanges.setTitle("ACHTUNG!!!")
-                    .setMessage("Wenn du diese Seite jetzt verlässt, werden deine Änderungen nicht übernommen.")
-                    .setPositiveButton("Seite verlassen, ohne zu speichern", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(mainActivityIntent);
-                        }
-                    })
-                    .setNegativeButton("Auf der Seite bleiben", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
+            alertUserSaveChanges.setTitle(SettingsAlert.TITLE)
+                    .setMessage(SettingsAlert.MESSAGE)
+                    .setPositiveButton(SettingsAlert.POSITIVE_BUTTON_TEXT, (dialogInterface, i) -> startActivity(mainActivityIntent))
+                    .setNegativeButton(SettingsAlert.NEGATIVE_BUTTON_TEXT, (dialogInterface, i) -> {
                     })
                     .show();
         } else {
@@ -107,18 +93,10 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
         Intent mainActivityIntent = new Intent(this, MainActivity.class);
         if (saveChangesBtn.isEnabled()) {
             AlertDialog.Builder alertUserSaveChanges = new AlertDialog.Builder(this);
-            alertUserSaveChanges.setTitle("ACHTUNG!!!")
-                    .setMessage("Wenn du diese Seite jetzt verlässt, werden deine Änderungen nicht übernommen.")
-                    .setPositiveButton("Seite verlassen, ohne zu speichern", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(mainActivityIntent);
-                        }
-                    })
-                    .setNegativeButton("Auf der Seite bleiben", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
+            alertUserSaveChanges.setTitle(SettingsAlert.TITLE)
+                    .setMessage(SettingsAlert.MESSAGE)
+                    .setPositiveButton(SettingsAlert.POSITIVE_BUTTON_TEXT, (dialogInterface, i) -> startActivity(mainActivityIntent))
+                    .setNegativeButton(SettingsAlert.NEGATIVE_BUTTON_TEXT, (dialogInterface, i) -> {
                     })
                     .show();
         } else {
@@ -128,37 +106,37 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
     }
 
     public void saveChanges(View view) {
-        String isMuting = "true";
+        boolean isMuting = true;
         if (isMutingCheckbox.isChecked()) {
-            isMuting = "false";
+            isMuting = false;
         }
 
         SettingsData settingsData = new SettingsData(isMuting, settingsSingleton.getSettingsData().getPriceOption());
         settingsSingleton.setSettingsData(settingsData);
-        databaseSettingsHelper.addSettingsDataToDatabase(settingsData);
+        sqLiteSettingsRepository.persist(settingsData);
 
         Intent mainActivityIntent = new Intent(this, MainActivity.class);
         startActivity(mainActivityIntent);
     }
 
-    public void initializeOldSettings() {
-        if (settingsSingleton.getSettingsData().getPriceOption().equals("Prozent (%)")) {
-            this.currentSettings.put("priceOptions", settingsSingleton.getSettingsData().getPriceOption());
+    public void initializeBySettingsSingleton() {
+        if (settingsSingleton.getSettingsData().getPriceOption().equals("Prozent")) {
+            this.currentSettings.put(SQLiteSettingsRepository.COL_PRICE_OPTION, settingsSingleton.getSettingsData().getPriceOption());
             this.settingsPriceOptions.setSelection(1);
-        } else if (settingsSingleton.getSettingsData().getPriceOption().equals("USD ($)")) {
-            this.currentSettings.put("priceOptions", "USD ($)");
+        } else if (settingsSingleton.getSettingsData().getPriceOption().equals("USD")) {
+            this.currentSettings.put(SQLiteSettingsRepository.COL_PRICE_OPTION, "USD");
             this.settingsPriceOptions.setSelection(0);
         }
-        if (settingsSingleton.getSettingsData().isMuting().equals("true")) {
-            this.isMutingCheckbox.setChecked(false);
+        if (settingsSingleton.getSettingsData().isMuting()) {
+            this.isMutingCheckbox.setChecked(true);
             this.settingsMusicLabel.setText("Erinnerungsmusik aus");
             this.settingsVolumeImg.setImageResource(R.drawable.ic_volume_mute);
-            this.currentSettings.put("muting", "true");
-        } else if (settingsSingleton.getSettingsData().isMuting().equals("false")) {
-            this.isMutingCheckbox.setChecked(true);
+            this.currentSettings.put(SQLiteSettingsRepository.COL_IS_MUTING, "true");
+        } else {
+            this.isMutingCheckbox.setChecked(false);
             this.settingsMusicLabel.setText("Erinnerungsmusik an");
             this.settingsVolumeImg.setImageResource(R.drawable.ic_volume_up);
-            this.currentSettings.put("muting", "false");
+            this.currentSettings.put(SQLiteSettingsRepository.COL_IS_MUTING, "false");
         }
     }
 
@@ -180,7 +158,7 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
 
     @Override
     public void initDatabase() {
-        this.databaseSettingsHelper = new DatabaseSettingsHelper(this);
+        this.sqLiteSettingsRepository = new SQLiteSettingsRepository(this);
     }
 
     @Override
@@ -204,6 +182,6 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
         initDatabase();
         initSingleton();
         initToolbar();
-        initializeOldSettings();
+        initializeBySettingsSingleton();
     }
 }

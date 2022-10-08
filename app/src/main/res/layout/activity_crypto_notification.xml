@@ -41,7 +41,7 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/inputBitcoinPrice"
+            android:id="@+id/inputCryptoPrice"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/custom_input"

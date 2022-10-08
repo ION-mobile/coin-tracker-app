@@ -4,13 +4,17 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import de.ion.coinTrackerApp.bitcoin.database.BitcoinDataInitializer;
-import de.ion.coinTrackerApp.notification.database.NotificationDataInitializer;
-import de.ion.coinTrackerApp.settings.database.SettingsDatabaseInitializer;
-import de.ion.coinTrackerApp.threads.CryptoAPIHandler;
+import de.ion.coinTrackerApp.background.crypto.CryptoAPIService;
+import de.ion.coinTrackerApp.crypto.utility.CryptoSingletonBySqLiteProvider;
+import de.ion.coinTrackerApp.crypto.utility.CryptoSingletonProvider;
+import de.ion.coinTrackerApp.notification.utility.NotificationSingletonBySqLiteProvider;
+import de.ion.coinTrackerApp.notification.utility.NotificationSingletonProvider;
+import de.ion.coinTrackerApp.settings.utility.SettingsSingletonBySqLiteProvider;
+import de.ion.coinTrackerApp.settings.utility.SettingsSingletonProvider;
 
 public class BackgroundService extends Service {
-    public BackgroundService() {}
+    public BackgroundService() {
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -18,7 +22,8 @@ public class BackgroundService extends Service {
     }
 
     @Override
-    public void onCreate() {}
+    public void onCreate() {
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -27,20 +32,14 @@ public class BackgroundService extends Service {
 
     @Override
     public void onDestroy() {
-        BitcoinDataInitializer cryptoDatabaseLoader = new BitcoinDataInitializer(this);
-        cryptoDatabaseLoader.initialize();
-        NotificationDataInitializer notificationDatabaseLoader = new NotificationDataInitializer(this);
-        notificationDatabaseLoader.prepare();
-        SettingsDatabaseInitializer settingsDatabaseLoader = new SettingsDatabaseInitializer(this);
-        settingsDatabaseLoader.prepare();
+        CryptoSingletonProvider cryptoSingletonProvider = new CryptoSingletonBySqLiteProvider(this);
+        cryptoSingletonProvider.prepare();
+        NotificationSingletonProvider notificationSingletonProvider = new NotificationSingletonBySqLiteProvider(this);
+        notificationSingletonProvider.prepare();
+        SettingsSingletonProvider settingsSingletonProvider = new SettingsSingletonBySqLiteProvider(this);
+        settingsSingletonProvider.prepare();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        CryptoAPIHandler cryptoAPIHandler = new CryptoAPIHandler(this);
-        cryptoAPIHandler.requestApi();
+        CryptoAPIService cryptoAPIService = new CryptoAPIService(this);
+        cryptoAPIService.requestApi();
     }
 }

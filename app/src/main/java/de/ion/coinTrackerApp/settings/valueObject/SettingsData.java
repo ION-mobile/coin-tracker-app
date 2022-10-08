@@ -1,14 +1,14 @@
 package de.ion.coinTrackerApp.settings.valueObject;
 
 public class SettingsData {
-    private String isMuting = "false";
-    private String priceOption = "USD ($)";
+    private final boolean isMuting;
+    private final String priceOption;
 
     /**
      * @param isMuting
      * @param priceOption
      */
-    public SettingsData (String isMuting, String priceOption) {
+    public SettingsData (boolean isMuting, String priceOption) {
         this.isMuting = isMuting;
         this.priceOption = priceOption;
     }
@@ -16,7 +16,7 @@ public class SettingsData {
     /**
      * @return isMuting
      */
-    public String isMuting() {
+    public boolean isMuting() {
         return this.isMuting;
     }
 

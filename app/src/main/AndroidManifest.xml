@@ -48,8 +48,8 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
-        <receiver android:name=".notification.broadcast.BitcoinDipBroadcastReminder" />
-        <receiver android:name=".notification.broadcast.BitcoinPumpBroadcastReminder" />
+        <receiver android:name=".notification.broadcast.CryptoDipBroadcastReminder" />
+        <receiver android:name=".notification.broadcast.CryptoPumpBroadcastReminder" />
         <receiver android:name=".notification.broadcast.NotificationResetter" />
         <receiver
             android:name=".background.BroadcastOnBootReceiver"

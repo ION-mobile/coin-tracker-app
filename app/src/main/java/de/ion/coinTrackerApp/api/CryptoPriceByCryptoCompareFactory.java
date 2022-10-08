@@ -6,14 +6,14 @@ import org.json.JSONObject;
 import de.ion.coinTrackerApp.api.valueObject.CryptoPrice;
 
 public class CryptoPriceByCryptoCompareFactory implements CryptoPriceFactory {
-    private JSONObject bitcoinInformation;
+    private JSONObject cryptoData;
 
     /**
      * @param response
      */
     public CryptoPriceByCryptoCompareFactory(String response) {
         try {
-            bitcoinInformation = new JSONObject(response);
+            this.cryptoData = new JSONObject(response);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class CryptoPriceByCryptoCompareFactory implements CryptoPriceFactory {
     public CryptoPrice get(String key) {
         int currentCryptoPrice = 0;
         try {
-            currentCryptoPrice = bitcoinInformation.getInt(key);
+            currentCryptoPrice = this.cryptoData.getInt(key);
         } catch (JSONException e) {
             e.printStackTrace();
         }

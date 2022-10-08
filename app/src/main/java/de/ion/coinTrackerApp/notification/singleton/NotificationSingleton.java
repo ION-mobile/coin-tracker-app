@@ -1,6 +1,6 @@
 package de.ion.coinTrackerApp.notification.singleton;
 
-import de.ion.coinTrackerApp.notification.valueObject.NotificationData;
+import de.ion.coinTrackerApp.notification.entity.NotificationData;
 
 public class NotificationSingleton {
     private static NotificationSingleton notificationSingleton;
@@ -21,7 +21,7 @@ public class NotificationSingleton {
      * @return notificationData
      */
     public NotificationData getNotificationData() {
-        return notificationData;
+        return this.notificationData;
     }
 
     /**

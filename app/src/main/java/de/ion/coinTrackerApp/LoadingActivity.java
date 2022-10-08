@@ -10,30 +10,30 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import de.ion.coinTrackerApp.animation.AnimationImageZoomIn;
-import de.ion.coinTrackerApp.bitcoin.singleton.BitcoinSingleton;
-import de.ion.coinTrackerApp.bitcoin.database.BitcoinDataInitializer;
-import de.ion.coinTrackerApp.bitcoin.CryptoDataInitializer;
-import de.ion.coinTrackerApp.bitcoin.singleton.CryptoSingleton;
-import de.ion.coinTrackerApp.error.singleton.StringRequestErrorSingleton;
+import de.ion.coinTrackerApp.animation.AnimationImageZoomInService;
+import de.ion.coinTrackerApp.background.crypto.CryptoAPIService;
+import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
+import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
+import de.ion.coinTrackerApp.crypto.utility.CryptoSingletonBySqLiteProvider;
+import de.ion.coinTrackerApp.crypto.utility.CryptoSingletonProvider;
 import de.ion.coinTrackerApp.error.singleton.ErrorSingleton;
-import de.ion.coinTrackerApp.notification.database.NotificationDataInitializer;
-import de.ion.coinTrackerApp.notification.database.NotificationInitializer;
-import de.ion.coinTrackerApp.settings.database.SettingsDatabaseInitializer;
-import de.ion.coinTrackerApp.settings.database.SettingsInitializer;
-import de.ion.coinTrackerApp.threads.CryptoAPIHandler;
+import de.ion.coinTrackerApp.error.singleton.StringRequestErrorSingleton;
+import de.ion.coinTrackerApp.notification.utility.NotificationSingletonBySqLiteProvider;
+import de.ion.coinTrackerApp.notification.utility.NotificationSingletonProvider;
+import de.ion.coinTrackerApp.settings.utility.SettingsSingletonBySqLiteProvider;
+import de.ion.coinTrackerApp.settings.utility.SettingsSingletonProvider;
 
 public class LoadingActivity extends AppCompatActivity implements Activity {
     private TextView errorTxt;
-    private ImageView bitcoinImg;
+    private ImageView toolbarBitcoinImg;
 
     private ErrorSingleton errorSingleton;
 
-    private NotificationInitializer notificationLoader;
-    private SettingsInitializer settingsLoader;
-    private CryptoDataInitializer cryptoLoader;
+    private NotificationSingletonProvider notificationSingletonProvider;
+    private SettingsSingletonProvider settingsSingletonProvider;
+    private CryptoSingletonProvider cryptoSingletonProvider;
 
-    private CryptoAPIHandler cryptoAPIHandler;
+    private CryptoAPIService cryptoAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +42,11 @@ public class LoadingActivity extends AppCompatActivity implements Activity {
 
         init();
 
-        this.notificationLoader.prepare();
-        this.settingsLoader.prepare();
-        this.cryptoLoader.initialize();
+        this.notificationSingletonProvider.prepare();
+        this.settingsSingletonProvider.prepare();
+        this.cryptoSingletonProvider.prepare();
 
-        cryptoAPIHandler.requestApi();
+        cryptoAPIService.requestApi();
 
         HandlerThread startThread = new HandlerThread("Crypto API Request");
         startThread.start();
@@ -55,13 +55,12 @@ public class LoadingActivity extends AppCompatActivity implements Activity {
         startThreadHandler.postDelayed(new Runnable() {
             public void run() {
                 runOnUiThread(new Runnable() {
-                    final CryptoSingleton cryptoSingleton = BitcoinSingleton.getInstance();
-
+                    final CryptoSingleton cryptoSingleton = CryptoDataSingleton.getInstance();
                     @Override
                     public void run() {
                         while (true) {
-                            if (!this.cryptoSingleton.getBitcoinData().getCurrentCryptoPrice().equals("") &&
-                                    !this.cryptoSingleton.getBitcoinData().getFearAndGreedIndex().equals("")) {
+                            if (this.cryptoSingleton.getCryptoData().getCurrentCryptoPrice() != 0.0 &&
+                                    this.cryptoSingleton.getCryptoData().getFearAndGreedIndex() != 0.0) {
                                 Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(mainActivityIntent);
                                 break;
@@ -82,22 +81,23 @@ public class LoadingActivity extends AppCompatActivity implements Activity {
 
     public void loadViews() {
         this.errorTxt = (TextView) findViewById(R.id.errorTxt);
-        this.bitcoinImg = (ImageView) findViewById(R.id.toolbarBitcoinImg);
+        this.toolbarBitcoinImg = (ImageView) findViewById(R.id.toolbarBitcoinImg);
     }
 
     @Override
     public void initComponents() {
-        AnimationImageZoomIn animationImageZoomIn = new AnimationImageZoomIn(this, this.bitcoinImg);
+        new AnimationImageZoomInService(this, this.toolbarBitcoinImg);
 
-        this.notificationLoader = new NotificationDataInitializer(this);
-        this.settingsLoader = new SettingsDatabaseInitializer(this);
-        this.cryptoLoader = new BitcoinDataInitializer(this);
+        this.notificationSingletonProvider = new NotificationSingletonBySqLiteProvider(this);
+        this.settingsSingletonProvider = new SettingsSingletonBySqLiteProvider(this);
+        this.cryptoSingletonProvider = new CryptoSingletonBySqLiteProvider(this);
 
-        this.cryptoAPIHandler = new CryptoAPIHandler(this);
+        this.cryptoAPIService = new CryptoAPIService(this);
     }
 
     @Override
-    public void initDatabase() {}
+    public void initDatabase() {
+    }
 
     @Override
     public void initSingleton() {
@@ -105,7 +105,8 @@ public class LoadingActivity extends AppCompatActivity implements Activity {
     }
 
     @Override
-    public void initToolbar() {}
+    public void initToolbar() {
+    }
 
     @Override
     public void init() {

@@ -6,15 +6,16 @@ import org.json.JSONObject;
 
 import de.ion.coinTrackerApp.api.valueObject.FearAndGreedIndex;
 
-public class FearAndGreedIndexByApiAlternativeFactory implements FearAndGreedIndexFactory{
-    private JSONObject fearAndGreedInformation;
+public class FearAndGreedIndexByApiAlternativeFactory implements FearAndGreedIndexFactory {
+    private JSONObject fearAndGreedData;
 
     /**
      * @param response
      */
     public FearAndGreedIndexByApiAlternativeFactory(String response) {
         try {
-            fearAndGreedInformation = new JSONObject(response);
+            JSONArray fearAndGreedDataArray = new JSONObject(response).getJSONArray("data");
+            this.fearAndGreedData = fearAndGreedDataArray.getJSONObject(0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -25,11 +26,9 @@ public class FearAndGreedIndexByApiAlternativeFactory implements FearAndGreedInd
      * @return fearAndGreedIndex
      */
     public FearAndGreedIndex get(String key) {
-        String currentFearAndGreedIndex = "0";
+        int currentFearAndGreedIndex = 0;
         try {
-            JSONArray fearAndGreedDataArray = fearAndGreedInformation.getJSONArray("data");
-            JSONObject fearAndGreedDataObjects = (JSONObject) fearAndGreedDataArray.getJSONObject(0);
-            currentFearAndGreedIndex = fearAndGreedDataObjects.getString(key);
+            currentFearAndGreedIndex = Integer.parseInt(this.fearAndGreedData.getString(key));
         } catch (JSONException e) {
             e.printStackTrace();
         }

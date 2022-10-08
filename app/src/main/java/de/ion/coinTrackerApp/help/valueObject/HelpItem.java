@@ -1,8 +1,8 @@
 package de.ion.coinTrackerApp.help.valueObject;
 
 public class HelpItem {
-    private String question;
-    private String answer;
+    private final String question;
+    private final String answer;
 
     /**
      * @param question

@@ -20,5 +20,6 @@ public class PriceOptionSpinner implements AdapterView.OnItemSelectedListener {
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 }

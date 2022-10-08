@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.HashMap;
 import java.util.Objects;
 
-import de.ion.coinTrackerApp.animation.AnimationImageZoomIn;
+import de.ion.coinTrackerApp.animation.AnimationImageZoomInService;
 import de.ion.coinTrackerApp.help.HelpItemFactory;
-import de.ion.coinTrackerApp.help.valueObject.HelpItem;
 import de.ion.coinTrackerApp.help.HelpItemForHelpActivityFactory;
+import de.ion.coinTrackerApp.help.valueObject.HelpItem;
 
 public class HelpActivity extends AppCompatActivity implements Activity {
     private ImageView toolbarBitcoinImg;
@@ -26,7 +26,6 @@ public class HelpActivity extends AppCompatActivity implements Activity {
     private TextView toolbarHeading;
     private LinearLayout helpActivityLinearLayout;
 
-    private AnimationImageZoomIn animationImageZoomIn;
     private HelpItemFactory helpItemFactory;
 
     @Override
@@ -66,7 +65,7 @@ public class HelpActivity extends AppCompatActivity implements Activity {
     }
 
     public void initComponents() {
-        this.animationImageZoomIn = new AnimationImageZoomIn(this, this.toolbarBitcoinImg);
+        new AnimationImageZoomInService(this, this.toolbarBitcoinImg);
         this.helpItemFactory = new HelpItemForHelpActivityFactory();
     }
 

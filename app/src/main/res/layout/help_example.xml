@@ -15,7 +15,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/bitcoinHelpQuestion"
+            android:id="@+id/helpQuestionTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cookie_bold"
@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/bitcoinHelpAnswer"
+            android:id="@+id/helpAnswerTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"

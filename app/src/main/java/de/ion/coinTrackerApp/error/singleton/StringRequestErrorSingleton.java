@@ -5,8 +5,6 @@ public class StringRequestErrorSingleton implements ErrorSingleton {
 
     private String errorMessage = "";
 
-    private StringRequestErrorSingleton() {}
-
     /**
      * @return stringRequestErrorSingleton
      */

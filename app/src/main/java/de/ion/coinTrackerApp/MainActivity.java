@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,11 +13,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import de.ion.coinTrackerApp.animation.AnimationImageZoomIn;
-import de.ion.coinTrackerApp.bitcoin.singleton.BitcoinSingleton;
-import de.ion.coinTrackerApp.bitcoin.singleton.CryptoSingleton;
+import de.ion.coinTrackerApp.animation.AnimationImageZoomInService;
+import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
+import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
-import de.ion.coinTrackerApp.settings.singleton.SettingsSingleton;
 
 public class MainActivity extends AppCompatActivity implements Activity {
     private TextView currentPriceTxt;
@@ -28,10 +26,7 @@ public class MainActivity extends AppCompatActivity implements Activity {
     private ImageButton toolbarOptions;
 
     private CryptoSingleton cryptoSingleton;
-    private SettingsSingleton settingsSingleton;
     private NotificationSingleton notificationSingleton;
-
-    private AnimationImageZoomIn animationImageZoomIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +41,12 @@ public class MainActivity extends AppCompatActivity implements Activity {
             public void run() {
                 while (true) {
                     try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                currentPriceTxt.setText("Derzeitiger Stand: " + cryptoSingleton.getBitcoinData().getCurrentCryptoPrice() + " $");
-                                inputPriceTxt.setText("Bitcoin Warnung: -/+ " + notificationSingleton.getNotificationData().getInputCryptoLimit() + " $");
-                                currentFearAndGreedTxt.setText("Fear And Greed Index: " + cryptoSingleton.getBitcoinData().getFearAndGreedIndex());
-                            }
+                        runOnUiThread(() -> {
+                            currentPriceTxt.setText("Derzeitiger Stand: " + cryptoSingleton.getCryptoData().getCurrentCryptoPrice() + " $");
+                            inputPriceTxt.setText("Bitcoin Warnung: -/+ " + notificationSingleton.getNotificationData().getInputCryptoLimit() + " $");
+                            currentFearAndGreedTxt.setText("Fear And Greed Index: " + cryptoSingleton.getCryptoData().getFearAndGreedIndex());
                         });
+
                         Thread.sleep(300);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -70,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements Activity {
 
     public void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("bitcoinNotification", "bitcoinNotificationChannel", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("cryptoPriceNotification", "cryptoPriceNotificationChannel", NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("channel for bitcoin price notification");
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
@@ -80,22 +73,19 @@ public class MainActivity extends AppCompatActivity implements Activity {
 
     public void displayOptionsMenu(View view) {
         PopupMenu optionsMenu = new PopupMenu(this, view);
-        optionsMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                int id = menuItem.getItemId();
+        optionsMenu.setOnMenuItemClickListener(menuItem -> {
+            int id = menuItem.getItemId();
 
-                if (id == R.id.action_help) {
-                    Intent helpActivityIntent = new Intent(MainActivity.this, HelpActivity.class);
-                    startActivity(helpActivityIntent);
-                }
-
-                if (id == R.id.action_settings) {
-                    Intent helpActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
-                    startActivity(helpActivityIntent);
-                }
-                return true;
+            if (id == R.id.action_help) {
+                Intent helpActivityIntent = new Intent(MainActivity.this, HelpActivity.class);
+                startActivity(helpActivityIntent);
             }
+
+            if (id == R.id.action_settings) {
+                Intent helpActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(helpActivityIntent);
+            }
+            return true;
         });
         optionsMenu.inflate(R.menu.menu_toolbar_crypto);
         optionsMenu.show();
@@ -113,16 +103,16 @@ public class MainActivity extends AppCompatActivity implements Activity {
 
     @Override
     public void initComponents() {
-        this.animationImageZoomIn = new AnimationImageZoomIn(this, this.toolbarBitcoinImg);
+        new AnimationImageZoomInService(this, this.toolbarBitcoinImg);
     }
 
     @Override
-    public void initDatabase() {}
+    public void initDatabase() {
+    }
 
     @Override
     public void initSingleton() {
-        this.cryptoSingleton = BitcoinSingleton.getInstance();
-        this.settingsSingleton = SettingsSingleton.getInstance();
+        this.cryptoSingleton = CryptoDataSingleton.getInstance();
         this.notificationSingleton = NotificationSingleton.getInstance();
     }
 

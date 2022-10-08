@@ -1,16 +1,19 @@
 package de.ion.coinTrackerApp.api.valueObject;
 
 public class FearAndGreedIndex {
-    private String fearAndGreedIndex;
+    private final Integer fearAndGreedIndex;
 
-    public FearAndGreedIndex(String fearAndGreedIndex) {
+    /**
+     * @param fearAndGreedIndex
+     */
+    public FearAndGreedIndex(Integer fearAndGreedIndex) {
         this.fearAndGreedIndex = fearAndGreedIndex;
     }
 
     /**
      * @return fearAndGreedIndex
      */
-    public String getFearAndGreedIndex() {
-        return fearAndGreedIndex;
+    public Integer getFearAndGreedIndex() {
+        return this.fearAndGreedIndex;
     }
 }

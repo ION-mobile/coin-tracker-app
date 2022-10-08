@@ -7,9 +7,6 @@ public class FearAndGreedApiSingleton implements ApiSingleton {
 
     private StringRequest stringRequest = null;
 
-    private FearAndGreedApiSingleton() {
-    }
-
     /**
      * @return fearAndGreedAPISingleton
      */

@@ -3,19 +3,17 @@ package de.ion.coinTrackerApp.api.singleton;
 import com.android.volley.toolbox.StringRequest;
 
 public class CryptoApiSingleton implements ApiSingleton {
-    private static CryptoApiSingleton volleyApiSingleton;
+    private static CryptoApiSingleton cryptoApiSingleton;
 
     private StringRequest stringRequest = null;
-
-    private CryptoApiSingleton() {}
 
     /**
      * @return volleyApiSingleton
      */
     public static CryptoApiSingleton getInstance() {
-        if (volleyApiSingleton == null)
-            volleyApiSingleton = new CryptoApiSingleton();
-        return volleyApiSingleton;
+        if (cryptoApiSingleton == null)
+            cryptoApiSingleton = new CryptoApiSingleton();
+        return cryptoApiSingleton;
     }
 
     /**

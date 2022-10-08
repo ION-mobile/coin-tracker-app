@@ -7,7 +7,8 @@ public class SettingsSingleton {
 
     private SettingsData settingsData;
 
-    private SettingsSingleton() {}
+    private SettingsSingleton() {
+    }
 
     /**
      * @return settingsSingleton

@@ -1,12 +1,12 @@
 package de.ion.coinTrackerApp.api.valueObject;
 
 public class CryptoPrice {
-    private int cryptoPrice;
+    private final Integer cryptoPrice;
 
     /**
      * @param cryptoPrice
      */
-    public CryptoPrice(int cryptoPrice) {
+    public CryptoPrice(Integer cryptoPrice) {
         this.cryptoPrice = cryptoPrice;
     }
 

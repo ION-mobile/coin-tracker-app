@@ -16,12 +16,8 @@
     <string name="einstellungen_checkbox_musik_an">Musik an</string>
     <string name="einstellungen_uebernehmen_button">Änderungen übernehmen</string>
     <string-array name="einstellungen_price_options">
-        <item>USD ($)</item>
-        <item>Prozent (%)</item>
-    </string-array>
-    <string-array name="einstellungen_price_options_up_down">
-        <item>Pump</item>
-        <item>Dip</item>
+        <item>USD</item>
+        <item>Prozent</item>
     </string-array>
     <string name="action_help">Hilfe</string>
     <string name="action_settings">Einstellungen</string>

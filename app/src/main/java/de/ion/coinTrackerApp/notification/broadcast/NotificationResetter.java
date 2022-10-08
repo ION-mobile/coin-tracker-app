@@ -6,21 +6,21 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationManagerCompat;
 
-import de.ion.coinTrackerApp.database.DatabaseNotificationHelper;
+import de.ion.coinTrackerApp.database.SQLiteNotificationRepository;
+import de.ion.coinTrackerApp.notification.entity.NotificationData;
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
-import de.ion.coinTrackerApp.notification.valueObject.NotificationData;
 
 public class NotificationResetter extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationSingleton notificationSingleton = NotificationSingleton.getInstance();
 
-        NotificationData notificationData = new NotificationData("bitcoin", "0", "0", true, "");
+        NotificationData notificationData = new NotificationData("", 0.0, 0, true);
 
         notificationSingleton.setNotificationData(notificationData);
 
-        DatabaseNotificationHelper databaseNotificationHelper = new DatabaseNotificationHelper(context);
-        databaseNotificationHelper.addWarningDataToDatabase(notificationSingleton.getNotificationData());
+        SQLiteNotificationRepository databaseNotificationRepository = new SQLiteNotificationRepository(context);
+        databaseNotificationRepository.persist(notificationSingleton.getNotificationData());
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.cancelAll();
