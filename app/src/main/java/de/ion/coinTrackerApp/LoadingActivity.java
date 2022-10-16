@@ -11,7 +11,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import de.ion.coinTrackerApp.animation.AnimationImageZoomInService;
-import de.ion.coinTrackerApp.background.crypto.CryptoAPIService;
+import de.ion.coinTrackerApp.service.CryptoAPIService;
+import de.ion.coinTrackerApp.service.foreground.crypto.ForegroundCryptoAPIService;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.crypto.utility.CryptoSingletonBySqLiteProvider;
@@ -92,7 +93,7 @@ public class LoadingActivity extends AppCompatActivity implements Activity {
         this.settingsSingletonProvider = new SettingsSingletonBySqLiteProvider(this);
         this.cryptoSingletonProvider = new CryptoSingletonBySqLiteProvider(this);
 
-        this.cryptoAPIService = new CryptoAPIService(this);
+        this.cryptoAPIService = new ForegroundCryptoAPIService(this);
     }
 
     @Override

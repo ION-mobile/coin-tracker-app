@@ -1,14 +1,15 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service.foreground;
 
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
-import de.ion.coinTrackerApp.background.crypto.valueObject.DipPrice;
-import de.ion.coinTrackerApp.background.crypto.valueObject.PriceLimit;
-import de.ion.coinTrackerApp.background.crypto.valueObject.PumpPrice;
+import de.ion.coinTrackerApp.service.PriceLimitFactory;
+import de.ion.coinTrackerApp.service.valueObject.DipPrice;
+import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
+import de.ion.coinTrackerApp.service.valueObject.PumpPrice;
 
-public class CryptoPriceLimitFactory implements PriceLimitFactory{
+public class ForegroundCryptoPriceLimitFactory implements PriceLimitFactory {
     private final NotificationSingleton notificationSingleton;
 
-    public CryptoPriceLimitFactory() {
+    public ForegroundCryptoPriceLimitFactory() {
         this.notificationSingleton = NotificationSingleton.getInstance();
     }
 

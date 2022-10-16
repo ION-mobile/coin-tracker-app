@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import de.ion.coinTrackerApp.animation.AnimationImageZoomInService;
-import de.ion.coinTrackerApp.background.BackgroundService;
+import de.ion.coinTrackerApp.service.background.BackgroundService;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.database.DatabaseCryptoRepository;

@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service.foreground.crypto;
 
 import android.content.Context;
 
@@ -6,11 +6,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 import de.ion.coinTrackerApp.api.singleton.CryptoApiSingleton;
-import de.ion.coinTrackerApp.api.v1.crypto.CryptoPriceByCryptoCompareStringRequestProvider;
+import de.ion.coinTrackerApp.api.v1.crypto.ForegroundCryptoPriceByCryptoCompareStringRequestProvider;
 import de.ion.coinTrackerApp.api.v1.crypto.CryptoPriceStringRequestProvider;
 import de.ion.coinTrackerApp.api.singleton.ApiSingleton;
+import de.ion.coinTrackerApp.service.foreground.ForegroundApiDataCaller;
 
-public class CryptoApiDataCaller implements ApiDataCaller {
+public class ForegroundCryptoApiDataCaller implements ForegroundApiDataCaller {
     private final Context context;
 
     private final ApiSingleton cryptoApiSingleton;
@@ -20,10 +21,10 @@ public class CryptoApiDataCaller implements ApiDataCaller {
     /**
      * @param context
      */
-    public CryptoApiDataCaller(Context context) {
+    public ForegroundCryptoApiDataCaller(Context context) {
         this.context = context;
         this.cryptoApiSingleton = CryptoApiSingleton.getInstance();
-        this.cryptoPriceStringRequestProvider = new CryptoPriceByCryptoCompareStringRequestProvider();
+        this.cryptoPriceStringRequestProvider = new ForegroundCryptoPriceByCryptoCompareStringRequestProvider();
     }
 
     public void callApi() {

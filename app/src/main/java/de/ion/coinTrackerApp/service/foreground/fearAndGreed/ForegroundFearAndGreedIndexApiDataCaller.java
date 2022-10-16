@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service.foreground.fearAndGreed;
 
 import android.content.Context;
 
@@ -9,8 +9,9 @@ import de.ion.coinTrackerApp.api.singleton.FearAndGreedApiSingleton;
 import de.ion.coinTrackerApp.api.v1.fearAndGreed.FearAndGreedIndexByApiAlternativeStringRequestProvider;
 import de.ion.coinTrackerApp.api.v1.fearAndGreed.FearAndGreedIndexStringRequestProvider;
 import de.ion.coinTrackerApp.api.singleton.ApiSingleton;
+import de.ion.coinTrackerApp.service.foreground.ForegroundApiDataCaller;
 
-public class FearAndGreedIndexApiDataCaller implements ApiDataCaller {
+public class ForegroundFearAndGreedIndexApiDataCaller implements ForegroundApiDataCaller {
     private final Context context;
 
     private final ApiSingleton fearAndGreedApiSingleton;
@@ -20,7 +21,7 @@ public class FearAndGreedIndexApiDataCaller implements ApiDataCaller {
     /**
      * @param context
      */
-    public FearAndGreedIndexApiDataCaller(Context context) {
+    public ForegroundFearAndGreedIndexApiDataCaller(Context context) {
         this.context = context;
         this.fearAndGreedApiSingleton = FearAndGreedApiSingleton.getInstance();
         this.fearAndGreedIndexStringRequestProvider = new FearAndGreedIndexByApiAlternativeStringRequestProvider();

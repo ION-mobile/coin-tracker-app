@@ -1,6 +1,6 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service;
 
-import de.ion.coinTrackerApp.background.crypto.valueObject.PriceLimit;
+import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
 
 public interface PriceLimitFactory {
     /**

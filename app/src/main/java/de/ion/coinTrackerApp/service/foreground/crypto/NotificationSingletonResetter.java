@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service.foreground.crypto;
 
 public interface NotificationSingletonResetter {
     public void reset();

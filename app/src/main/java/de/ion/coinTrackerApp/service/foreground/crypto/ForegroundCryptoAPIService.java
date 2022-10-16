@@ -1,8 +1,13 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service.foreground.crypto;
 
 import android.content.Context;
 
-import de.ion.coinTrackerApp.background.crypto.valueObject.PriceLimit;
+import de.ion.coinTrackerApp.service.foreground.ForegroundCryptoPriceLimitFactory;
+import de.ion.coinTrackerApp.service.CryptoAPIService;
+import de.ion.coinTrackerApp.service.PriceLimitFactory;
+import de.ion.coinTrackerApp.service.foreground.ForegroundApiDataCaller;
+import de.ion.coinTrackerApp.service.foreground.fearAndGreed.ForegroundFearAndGreedIndexApiDataCaller;
+import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
@@ -10,14 +15,14 @@ import de.ion.coinTrackerApp.notification.warning.WarningDipNotification;
 import de.ion.coinTrackerApp.notification.warning.WarningNotification;
 import de.ion.coinTrackerApp.notification.warning.WarningPumpNotification;
 
-public class CryptoAPIService {
+public class ForegroundCryptoAPIService implements CryptoAPIService {
     private final Context context;
 
     private final CryptoSingleton cryptoSingleton;
     private final NotificationSingleton notificationSingleton;
 
-    public ApiDataCaller cryptoApiDataCaller;
-    private final ApiDataCaller fearAndGreedIndexApiDataCaller;
+    private final ForegroundApiDataCaller foregroundCryptoApiDataCaller;
+    private final ForegroundApiDataCaller foregroundFearAndGreedIndexApiDataCaller;
     private final NotificationSingletonResetter notificationSingletonPriceResetter;
     private final NotificationSingletonResetter notificationSingletonWaitingResetter;
 
@@ -29,24 +34,24 @@ public class CryptoAPIService {
     /**
      * @param context
      */
-    public CryptoAPIService(Context context) {
+    public ForegroundCryptoAPIService(Context context) {
         this.context = context;
         this.cryptoSingleton = CryptoDataSingleton.getInstance();
         this.notificationSingleton = NotificationSingleton.getInstance();
         this.notificationSingletonPriceResetter = new NotificationSingletonPriceResetter();
         this.notificationSingletonWaitingResetter = new NotificationSingletonWaitingResetter();
-        this.cryptoApiDataCaller = new CryptoApiDataCaller(context);
-        this.fearAndGreedIndexApiDataCaller = new FearAndGreedIndexApiDataCaller(context);
-        this.priceLimitFactory = new CryptoPriceLimitFactory();
+        this.foregroundCryptoApiDataCaller = new ForegroundCryptoApiDataCaller(context);
+        this.foregroundFearAndGreedIndexApiDataCaller = new ForegroundFearAndGreedIndexApiDataCaller(context);
+        this.priceLimitFactory = new ForegroundCryptoPriceLimitFactory();
     }
 
     public void requestApi() {
-        this.fearAndGreedIndexApiDataCaller.callApi();
+        this.foregroundFearAndGreedIndexApiDataCaller.callApi();
 
         new Thread() {
             public void run() {
                 while (true) {
-                    cryptoApiDataCaller.callApi();
+                    foregroundCryptoApiDataCaller.callApi();
                     priceLimit = priceLimitFactory.getPriceLimit();
 
                     if (isReadyForTracking()) {

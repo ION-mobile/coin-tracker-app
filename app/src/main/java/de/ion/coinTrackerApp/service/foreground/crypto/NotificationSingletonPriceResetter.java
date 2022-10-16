@@ -1,19 +1,20 @@
-package de.ion.coinTrackerApp.background.crypto;
+package de.ion.coinTrackerApp.service.foreground.crypto;
 
 import de.ion.coinTrackerApp.notification.entity.NotificationData;
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
 
-public class NotificationSingletonWaitingResetter implements NotificationSingletonResetter {
+public class NotificationSingletonPriceResetter implements NotificationSingletonResetter {
     private final NotificationSingleton notificationSingleton;
 
-    public NotificationSingletonWaitingResetter() {
+    public NotificationSingletonPriceResetter() {
         this.notificationSingleton = NotificationSingleton.getInstance();
     }
 
     @Override
     public void reset() {
         NotificationData notificationData = this.notificationSingleton.getNotificationData();
-        notificationData.shouldWaitingForWarning(false);
+        notificationData.setInputCryptoLimit(0);
+        notificationData.setInputCryptoPrice(0.0);
         this.notificationSingleton.setNotificationData(notificationData);
     }
 }
