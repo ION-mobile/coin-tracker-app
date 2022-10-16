@@ -5,6 +5,7 @@
     <string name="willkommen_fear_and_greed">Fear And Greed Index:</string>
     <string name="willkommen_bitcoin_input">Bitcoin Warnung:</string>
     <string name="willkommen_warnung_bearbeiten">Warnung bearbeiten</string>
+    <string name="willkommen_warnung_erstellen">Warnung erstellen</string>
     <string name="krypto_notification_position_hint">gewünschte Bitcoin Position</string>
     <string name="krypto_notification_tracken_beenden">Warnung deaktivieren</string>
     <string name="krypto_notification_warnung_aktivieren">Warnung aktivieren</string>

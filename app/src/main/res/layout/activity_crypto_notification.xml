@@ -58,7 +58,8 @@
             android:paddingRight="30dp"
             android:textColor="@color/textColor"
             android:textColorHint="@color/hintColor"
-            android:textCursorDrawable="@drawable/custom_input_cursor" />
+            android:textCursorDrawable="@drawable/custom_input_cursor"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/trackBtn"
@@ -69,9 +70,10 @@
             android:background="@drawable/custom_button"
             android:fontFamily="@font/cookie_bold"
             android:onClick="startNewService"
-            android:text="@string/willkommen_warnung_bearbeiten"
+            android:text="@string/willkommen_warnung_erstellen"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/endTrackBtn"
@@ -85,7 +87,7 @@
             android:text="@string/krypto_notification_tracken_beenden"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </LinearLayout>
 
     <View

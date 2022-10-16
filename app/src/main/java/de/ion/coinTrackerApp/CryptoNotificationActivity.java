@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import de.ion.coinTrackerApp.animation.AnimationImageZoomInService;
-import de.ion.coinTrackerApp.service.background.BackgroundService;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.database.DatabaseCryptoRepository;
@@ -20,6 +19,7 @@ import de.ion.coinTrackerApp.database.SQLiteCryptoRepository;
 import de.ion.coinTrackerApp.database.SQLiteNotificationRepository;
 import de.ion.coinTrackerApp.notification.entity.NotificationData;
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
+import de.ion.coinTrackerApp.service.background.BackgroundService;
 import de.ion.coinTrackerApp.settings.singleton.SettingsSingleton;
 
 public class CryptoNotificationActivity extends AppCompatActivity implements Activity {
@@ -55,11 +55,15 @@ public class CryptoNotificationActivity extends AppCompatActivity implements Act
                 while (true) {
                     try {
                         runOnUiThread(() -> {
-                            if (notificationSingleton.getNotificationData().getInputCryptoLimit() != 0.0) {
-                                trackBtn.setText("Warnung updaten");
+                            if (notificationSingleton.getNotificationData().getInputCryptoLimit() != 0.0 ||
+                                    !notificationSingleton.getNotificationData().isWaitingForWarning()) {
+                                inputCryptoPrice.setVisibility(View.GONE);
+                                trackBtn.setVisibility(View.GONE);
                                 endTrackBtn.setVisibility(View.VISIBLE);
                             } else {
-                                trackBtn.setText("Warnung aktivieren");
+                                inputCryptoPrice.setVisibility(View.VISIBLE);
+                                trackBtn.setVisibility(View.VISIBLE);
+                                trackBtn.setText("Warnung erstellen");
                                 endTrackBtn.setVisibility(View.GONE);
                             }
                         });

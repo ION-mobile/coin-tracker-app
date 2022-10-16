@@ -100,8 +100,7 @@ public class ForegroundCryptoAPIService implements CryptoAPIService {
      * @return shouldResetWarning
      */
     private boolean shouldResetWarning() {
-        return this.cryptoSingleton.getCryptoData().getCurrentCryptoPrice() == 0.0 &&
-                this.priceLimit.getPumpPrice().getValue() == 0 &&
+        return this.priceLimit.getPumpPrice().getValue() == 0 &&
                 this.priceLimit.getDipPrice().getValue() == 0 &&
                 this.notificationSingleton.getNotificationData().isWaitingForWarning() &&
                 this.warningNotification != null;
