@@ -14,16 +14,31 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import de.ion.coinTrackerApp.LoadingActivity;
 import de.ion.coinTrackerApp.R;
-import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
-import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
+import de.ion.coinTrackerApp.api.valueObject.CryptoPrice;
+import de.ion.coinTrackerApp.database.DatabaseCryptoRepository;
+import de.ion.coinTrackerApp.database.SQLiteCryptoRepository;
 
 public class CryptoPumpBroadcastReminder extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onReceive(Context context, Intent intent) {
-        CryptoSingleton cryptoSingleton = CryptoDataSingleton.getInstance();
+        CryptoPrice cryptoPrice = new CryptoPrice(0);
+
+        try {
+            DatabaseCryptoRepository databaseCryptoRepository = new SQLiteCryptoRepository(context);
+            JSONObject currentPriceJsonData = databaseCryptoRepository.fetchCurrentPriceById("1");
+            cryptoPrice = new CryptoPrice(
+                    (int) Double.parseDouble(currentPriceJsonData.getString(SQLiteCryptoRepository.COL_CURRENT_PRICE))
+            );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher_foreground);
 
         Intent navigationIntent = new Intent(context, NotificationResetter.class);
@@ -38,12 +53,10 @@ public class CryptoPumpBroadcastReminder extends BroadcastReceiver {
                 .Builder(context, "cryptoPriceNotification")
                 .setSmallIcon(R.mipmap.ic_launcher_foreground)
                 .setContentTitle("Crypto Tracker")
-                .setContentText("Bitcoin ist so eben auf " + cryptoSingleton.getCryptoData()
-                        .getCurrentCryptoPrice() + " Dollar gestiegen.")
+                .setContentText("Bitcoin ist so eben auf " + cryptoPrice.getCryptoPrice() + " Dollar gestiegen.")
                 .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Bitcoin ist so eben auf " + cryptoSingleton.getCryptoData()
-                                .getCurrentCryptoPrice() + " Dollar gestiegen."))
+                        .bigText("Bitcoin ist so eben auf " + cryptoPrice.getCryptoPrice() + " Dollar gestiegen."))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .addAction(R.mipmap.ic_launcher_foreground, "Warnung ausstellen", navigationPendingIntent)
                 .setContentIntent(loadingScreenPendingIntent)

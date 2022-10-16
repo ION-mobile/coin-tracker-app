@@ -1,5 +1,7 @@
 package de.ion.coinTrackerApp.api.v1.crypto;
 
+import android.content.Context;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.ParseError;
@@ -16,6 +18,8 @@ import de.ion.coinTrackerApp.api.valueObject.CryptoPrice;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.crypto.valueObject.CryptoData;
+import de.ion.coinTrackerApp.database.DatabaseCryptoRepository;
+import de.ion.coinTrackerApp.database.SQLiteCryptoRepository;
 import de.ion.coinTrackerApp.error.singleton.ErrorSingleton;
 import de.ion.coinTrackerApp.error.singleton.StringRequestErrorSingleton;
 
@@ -32,7 +36,10 @@ public class ForegroundCryptoPriceByCryptoCompareStringRequestProvider implement
 
     private final ErrorSingleton errorSingleton;
 
-    public ForegroundCryptoPriceByCryptoCompareStringRequestProvider() {
+    private final DatabaseCryptoRepository databaseCryptoRepository;
+
+    public ForegroundCryptoPriceByCryptoCompareStringRequestProvider(Context context) {
+        this.databaseCryptoRepository = new SQLiteCryptoRepository(context);
         this.cryptoSingleton = CryptoDataSingleton.getInstance();
         this.cryptoApiSingleton = CryptoApiSingleton.getInstance();
         this.errorSingleton = StringRequestErrorSingleton.getInstance();
@@ -61,6 +68,11 @@ public class ForegroundCryptoPriceByCryptoCompareStringRequestProvider implement
                                 (double) currentPrice.getCryptoPrice(),
                                 cryptoSingleton.getCryptoData().getFearAndGreedIndex());
                         cryptoSingleton.setCryptoData(cryptoData);
+                        this.databaseCryptoRepository.persist(
+                                new CryptoData(
+                                        CRYPTO_NAME,
+                                        cryptoData.getCurrentCryptoPrice(),
+                                        0));
                     }
                 }, error -> {
             if (error instanceof NetworkError || error instanceof AuthFailureError ||

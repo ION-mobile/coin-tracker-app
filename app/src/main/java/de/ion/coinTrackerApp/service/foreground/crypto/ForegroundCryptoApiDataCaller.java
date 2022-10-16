@@ -24,7 +24,7 @@ public class ForegroundCryptoApiDataCaller implements ForegroundApiDataCaller {
     public ForegroundCryptoApiDataCaller(Context context) {
         this.context = context;
         this.cryptoApiSingleton = CryptoApiSingleton.getInstance();
-        this.cryptoPriceStringRequestProvider = new ForegroundCryptoPriceByCryptoCompareStringRequestProvider();
+        this.cryptoPriceStringRequestProvider = new ForegroundCryptoPriceByCryptoCompareStringRequestProvider(context);
     }
 
     public void callApi() {
