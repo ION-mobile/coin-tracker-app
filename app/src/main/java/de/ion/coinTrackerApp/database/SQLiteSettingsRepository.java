@@ -74,7 +74,7 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
         Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
 
         JSONArray settingsData = new JSONArray();
-        while (cursor.moveToNext()) {
+        if (cursor.getCount() > 0 && cursor.moveToFirst()) {
             JSONObject data = new JSONObject();
             try {
                 data.put(COL_IS_MUTING, cursor.getString(0));
@@ -106,7 +106,7 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
         Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
 
         JSONArray settingsData = new JSONArray();
-        while (cursor.moveToNext()) {
+        if (cursor.getCount() > 0 && cursor.moveToFirst()) {
             JSONObject data = new JSONObject();
             try {
                 data.put(COL_IS_MUTING, cursor.getString(0));

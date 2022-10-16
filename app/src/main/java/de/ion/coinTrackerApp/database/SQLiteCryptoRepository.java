@@ -77,7 +77,7 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
         Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
 
         JSONArray cryptoData = new JSONArray();
-        while (cursor.moveToNext()) {
+        if (cursor.getCount() > 0 && cursor.moveToFirst()) {
             JSONObject data = new JSONObject();
             try {
                 data.put(COL_CRYPTO_NAME, cursor.getString(0));
@@ -110,10 +110,10 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
         Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
 
         JSONArray cryptoData = new JSONArray();
-        while (cursor.moveToNext()) {
+        if (cursor.getCount() > 0 && cursor.moveToFirst()) {
             JSONObject data = new JSONObject();
             try {
-                data.put(COL_CURRENT_PRICE, cursor.getString(1));
+                data.put(COL_CURRENT_PRICE, cursor.getString(0));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
