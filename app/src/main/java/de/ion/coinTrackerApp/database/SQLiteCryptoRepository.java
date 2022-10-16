@@ -94,4 +94,34 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
 
         return cryptoData;
     }
+
+    /**
+     * @param id
+     * @return cryptoData
+     */
+    public JSONObject fetchCurrentPriceById(String id) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] collumns = {
+                COL_CURRENT_PRICE
+        };
+        String where = COL_ID + "= ?";
+        String[] whereArgs = {id};
+        Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
+
+        JSONArray cryptoData = new JSONArray();
+        while (cursor.moveToNext()) {
+            JSONObject data = new JSONObject();
+            try {
+                data.put(COL_CURRENT_PRICE, cursor.getString(1));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            cryptoData.put(data);
+        }
+
+        cursor.close();
+
+        return cryptoData.getJSONObject(0);
+    }
 }

@@ -95,7 +95,7 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
      * @param id
      * @return settingsData
      */
-    public JSONArray fetchIsMutingById(String id) {
+    public JSONObject fetchIsMutingById(String id) throws JSONException {
         SQLiteDatabase db = this.getWritableDatabase();
         String [] collumns = {
                 COL_IS_MUTING
@@ -118,6 +118,6 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
 
         cursor.close();
 
-        return settingsData;
+        return settingsData.getJSONObject(0);
     }
 }

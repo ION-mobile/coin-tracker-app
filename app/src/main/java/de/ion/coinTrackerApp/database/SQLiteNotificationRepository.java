@@ -95,4 +95,64 @@ public class SQLiteNotificationRepository extends SQLiteOpenHelper implements Da
 
         return notificationData;
     }
+
+    /**
+     * @param id
+     * @return inputPrice
+     */
+    public JSONObject fetchInputPriceById(String id) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String [] collumns = {
+                COL_INPUT_PRICE
+        };
+        String where = COL_ID + "= ?";
+        String[] whereArgs = {id};
+        Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
+
+        JSONArray notificationData = new JSONArray();
+        while (cursor.moveToNext()) {
+            JSONObject data = new JSONObject();
+            try {
+                data.put(COL_INPUT_PRICE, cursor.getString(1));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            notificationData.put(data);
+        }
+
+        cursor.close();
+
+        return notificationData.getJSONObject(0);
+    }
+
+    /**
+     * @param id
+     * @return inputLimit
+     */
+    public JSONObject fetchInputLimitById(String id) throws JSONException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String [] collumns = {
+                COL_INPUT_LIMIT
+        };
+        String where = COL_ID + "= ?";
+        String[] whereArgs = {id};
+        Cursor cursor = db.query(TABLE_NAME, collumns, where, whereArgs, null, null, null);
+
+        JSONArray notificationData = new JSONArray();
+        while (cursor.moveToNext()) {
+            JSONObject data = new JSONObject();
+            try {
+                data.put(COL_INPUT_LIMIT, cursor.getString(2));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            notificationData.put(data);
+        }
+
+        cursor.close();
+
+        return notificationData.getJSONObject(0);
+    }
 }
