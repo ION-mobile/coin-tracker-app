@@ -19,7 +19,7 @@ import de.ion.coinTrackerApp.crypto.valueObject.CryptoData;
 import de.ion.coinTrackerApp.error.singleton.ErrorSingleton;
 import de.ion.coinTrackerApp.error.singleton.StringRequestErrorSingleton;
 
-public class CryptoPriceByCryptoCompareStringRequestProvider implements CryptoPriceStringRequestProvider {
+public class ForegroundCryptoPriceByCryptoCompareStringRequestProvider implements CryptoPriceStringRequestProvider {
     private static final String CRYPTO_NAME = "bitcoin";
     private static final String CRYPTO_API_URL = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
     private static final String ERROR_MESSAGE_NETWORK = "ERROR: Du kannst dich nicht mit dem Internet verbinden. Überprüfe deine Internetverbindung und versuche es später erneut!";
@@ -32,7 +32,7 @@ public class CryptoPriceByCryptoCompareStringRequestProvider implements CryptoPr
 
     private final ErrorSingleton errorSingleton;
 
-    public CryptoPriceByCryptoCompareStringRequestProvider() {
+    public ForegroundCryptoPriceByCryptoCompareStringRequestProvider() {
         this.cryptoSingleton = CryptoDataSingleton.getInstance();
         this.cryptoApiSingleton = CryptoApiSingleton.getInstance();
         this.errorSingleton = StringRequestErrorSingleton.getInstance();

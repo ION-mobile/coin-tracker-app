@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.background.crypto.valueObject;
+package de.ion.coinTrackerApp.service.valueObject;
 
 public class PriceLimit {
     private final DipPrice dipPrice;
