@@ -65,7 +65,7 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
      * @param id
      * @return cryptoData
      */
-    public JSONArray fetchOneById(String id) {
+    public JSONArray fetchCryptoById(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] collumns = {
                 COL_CRYPTO_NAME,

@@ -29,7 +29,7 @@ public class SettingsSingletonBySqLiteProvider implements SettingsSingletonProvi
         }
 
         try {
-            JSONArray settingsJsonData = this.sqLiteSettingsRepository.fetchOneById("1");
+            JSONArray settingsJsonData = this.sqLiteSettingsRepository.fetchSettingsById("1");
             settingsData = new SettingsData(
                     false,
                     "USD");

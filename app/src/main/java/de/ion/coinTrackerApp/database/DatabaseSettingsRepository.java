@@ -14,7 +14,7 @@ public interface DatabaseSettingsRepository {
      * @param id
      * @return settingsData
      */
-    public JSONArray fetchOneById(String id);
+    public JSONArray fetchSettingsById(String id);
 
     /**
      * @param id

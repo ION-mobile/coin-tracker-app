@@ -66,7 +66,7 @@ public class SQLiteNotificationRepository extends SQLiteOpenHelper implements Da
      * @param id
      * @return notificationData
      */
-    public JSONArray fetchOneById(String id) {
+    public JSONArray fetchNotificationById(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String [] collumns = {
                 COL_CRYPTO_NAME,

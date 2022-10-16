@@ -30,7 +30,7 @@ public class CryptoSingletonBySqLiteProvider implements CryptoSingletonProvider 
         }
 
         try {
-            JSONArray cryptoJsonData = this.sqLiteCryptoRepository.fetchOneById("1");
+            JSONArray cryptoJsonData = this.sqLiteCryptoRepository.fetchCryptoById("1");
             cryptoData = new CryptoData(
                     "",
                     0.0,

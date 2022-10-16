@@ -63,7 +63,7 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
      * @param id
      * @return settingsData
      */
-    public JSONArray fetchOneById(String id) {
+    public JSONArray fetchSettingsById(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String [] collumns = {
                 COL_IS_MUTING,

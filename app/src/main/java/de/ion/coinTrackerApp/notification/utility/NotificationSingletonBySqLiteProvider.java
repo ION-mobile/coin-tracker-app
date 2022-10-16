@@ -29,7 +29,7 @@ public class NotificationSingletonBySqLiteProvider implements NotificationSingle
         }
 
         try {
-            JSONArray notificationJsonData = this.sqLiteNotificationRepository.fetchOneById("1");
+            JSONArray notificationJsonData = this.sqLiteNotificationRepository.fetchNotificationById("1");
             notificationData = new NotificationData(
                     "",
                     0.0,
