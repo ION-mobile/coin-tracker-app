@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.foreground.crypto;
+package de.ion.coinTrackerApp.service.foreground;
 
 import android.content.Context;
 
@@ -6,6 +6,10 @@ import de.ion.coinTrackerApp.service.foreground.ForegroundCryptoPriceLimitFactor
 import de.ion.coinTrackerApp.service.CryptoAPIService;
 import de.ion.coinTrackerApp.service.PriceLimitFactory;
 import de.ion.coinTrackerApp.service.foreground.ForegroundApiDataCaller;
+import de.ion.coinTrackerApp.service.foreground.crypto.ForegroundCryptoApiDataCaller;
+import de.ion.coinTrackerApp.service.foreground.crypto.NotificationSingletonPriceResetter;
+import de.ion.coinTrackerApp.service.foreground.crypto.NotificationSingletonResetter;
+import de.ion.coinTrackerApp.service.foreground.crypto.NotificationSingletonWaitingResetter;
 import de.ion.coinTrackerApp.service.foreground.fearAndGreed.ForegroundFearAndGreedIndexApiDataCaller;
 import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
 import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
