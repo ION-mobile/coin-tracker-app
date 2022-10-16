@@ -49,8 +49,8 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
         contentValues.put(COL_PRICE_OPTION, settingsData.getPriceOption());
         contentValues.put(COL_IS_MUTING, settingsData.isMuting());
 
-        String where = COL_ID + "= 0";
-        int isDatabaseSuccessfullWritten = db.update(TABLE_NAME, contentValues, where, null);
+        String where = COL_ID + "= ?";
+        int isDatabaseSuccessfullWritten = db.update(TABLE_NAME, contentValues, where,  new String[]{"1"});
 
         if(isDatabaseSuccessfullWritten == 0){
             db.insert(TABLE_NAME, null, contentValues);

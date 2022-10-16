@@ -52,8 +52,8 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
         contentValues.put(COL_CURRENT_PRICE, cryptoData.getCurrentCryptoPrice());
         contentValues.put(COL_FEAR_AND_GREED_INDEX, cryptoData.getFearAndGreedIndex());
 
-        String where = COL_CRYPTO_NAME + "= ?";
-        int isDatabaseSuccessfullWritten = db.update(TABLE_NAME, contentValues, where, new String[]{cryptoData.getCryptoName()});
+        String where = COL_ID + "= ?";
+        int isDatabaseSuccessfullWritten = db.update(TABLE_NAME, contentValues, where, new String[]{"1"});
 
         if (isDatabaseSuccessfullWritten == 0) {
             db.insert(TABLE_NAME, null, contentValues);

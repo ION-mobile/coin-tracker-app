@@ -52,8 +52,8 @@ public class SQLiteNotificationRepository extends SQLiteOpenHelper implements Da
         contentValues.put(COL_INPUT_PRICE, notificationData.getInputCryptoPrice());
         contentValues.put(COL_INPUT_LIMIT, notificationData.getInputCryptoLimit());
 
-        String where = COL_CRYPTO_NAME + "= ?";
-        int isDatabaseSuccessfullWritten = db.update(TABLE_NAME, contentValues, where, new String[]{notificationData.getCryptoName()});
+        String where = COL_ID + "= ?";
+        int isDatabaseSuccessfullWritten = db.update(TABLE_NAME, contentValues, where, new String[]{"1"});
 
         if(isDatabaseSuccessfullWritten == 0){
             db.insert(TABLE_NAME, null, contentValues);
