@@ -9,8 +9,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.ion.coinTrackerApp.R;
 import de.ion.coinTrackerApp.database.DatabaseSettingsRepository;
@@ -41,10 +41,9 @@ public class WarningDipNotification implements WarningNotification {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, AlarmManager.ELAPSED_REALTIME_WAKEUP, pendingIntent);
 
-        JSONArray settingsJsonData = sqLiteSettingsRepository.fetchIsMutingById("1");
-
         try {
-            if (!Boolean.parseBoolean(settingsJsonData.getJSONObject(0).getString(SQLiteSettingsRepository.COL_IS_MUTING))) {
+            JSONObject isMutingJsonData = sqLiteSettingsRepository.fetchIsMutingById("1");
+            if (!Boolean.parseBoolean(isMutingJsonData.getString(SQLiteSettingsRepository.COL_IS_MUTING))) {
                 mediaPlayer.start();
             }
         } catch (JSONException e) {
