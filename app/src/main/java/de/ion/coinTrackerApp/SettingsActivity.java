@@ -55,6 +55,9 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
                             if (isMutingCheckbox.isChecked()) {
                                 settingsMusicLabel.setText("Erinnerungsmusik aus");
                                 settingsVolumeImg.setImageResource(R.drawable.ic_volume_mute);
+                            } else {
+                                settingsMusicLabel.setText("Erinnerungsmusik ein");
+                                settingsVolumeImg.setImageResource(R.drawable.ic_volume_up);
                             }
 
                             saveChangesBtn.setEnabled(false);
@@ -107,7 +110,7 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
 
     public void saveChanges(View view) {
         boolean isMuting = true;
-        if (isMutingCheckbox.isChecked()) {
+        if (!isMutingCheckbox.isChecked()) {
             isMuting = false;
         }
 
@@ -127,6 +130,7 @@ public class SettingsActivity extends AppCompatActivity implements Activity {
             this.currentSettings.put(SQLiteSettingsRepository.COL_PRICE_OPTION, "USD");
             this.settingsPriceOptions.setSelection(0);
         }
+
         if (settingsSingleton.getSettingsData().isMuting()) {
             this.isMutingCheckbox.setChecked(true);
             this.settingsMusicLabel.setText("Erinnerungsmusik aus");
