@@ -9,10 +9,12 @@ import de.ion.coinTrackerApp.service.CryptoAPIService;
 import de.ion.coinTrackerApp.service.CurrentPriceFactory;
 import de.ion.coinTrackerApp.service.InputLimitFactory;
 import de.ion.coinTrackerApp.service.InputPriceFactory;
+import de.ion.coinTrackerApp.service.PriceLimitFactory;
 import de.ion.coinTrackerApp.service.background.crypto.BackgroundCryptoApiDataCaller;
 import de.ion.coinTrackerApp.service.background.valueObjects.CurrentPrice;
 import de.ion.coinTrackerApp.service.background.valueObjects.InputLimit;
 import de.ion.coinTrackerApp.service.background.valueObjects.InputPrice;
+import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
 
 public class BackgroundCryptoAPIService implements CryptoAPIService {
     private final Context context;
@@ -51,16 +53,25 @@ public class BackgroundCryptoAPIService implements CryptoAPIService {
                     backgroundCryptoApiDataCaller.callApi();
                     inputPrice = inputPriceFactory.getInputPrice();
                     inputLimit = inputLimitFactory.getInputLimit();
+                    PriceLimitFactory priceLimitFactory = new BackgroundCryptoPriceLimitFactory(inputPrice, inputLimit);
+                    PriceLimit priceLimit = priceLimitFactory.getPriceLimit();
+
                     currentPrice = currentPriceFactory.getCurrentPrice();
 
-                    if (inputLimit.getCryptoLimit() > currentPrice.getCryptoPrice()) {
+                    if (priceLimit.getDipPrice().getValue() > currentPrice.getCryptoPrice()) {
                         WarningNotification warningNotification = new WarningDipNotification(context);
                         warningNotification.start();
+
+                        inputLimit = new InputLimit(0);
+                        inputPrice = new InputPrice(0.0);
                     }
 
-                    if (inputLimit.getCryptoLimit() < currentPrice.getCryptoPrice()) {
+                    if (priceLimit.getPumpPrice().getValue() < currentPrice.getCryptoPrice()) {
                         WarningNotification warningNotification = new WarningPumpNotification(context);
                         warningNotification.start();
+
+                        inputLimit = new InputLimit(0);
+                        inputPrice = new InputPrice(0.0);
                     }
                 }
             }
