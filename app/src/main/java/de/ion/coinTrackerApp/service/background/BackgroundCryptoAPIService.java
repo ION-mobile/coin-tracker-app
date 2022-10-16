@@ -27,7 +27,7 @@ public class BackgroundCryptoAPIService implements CryptoAPIService {
     private InputLimit inputLimit;
     private InputPrice inputPrice;
 
-    private BackgroundApiDataCaller backgroundCryptoApiDataCaller;
+    private final BackgroundApiDataCaller backgroundCryptoApiDataCaller;
 
     /**
      * @param context
