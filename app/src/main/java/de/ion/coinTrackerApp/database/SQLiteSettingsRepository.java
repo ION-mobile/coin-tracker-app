@@ -87,6 +87,7 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
         }
 
         cursor.close();
+        db.close();
 
         return settingsData;
     }
@@ -117,6 +118,7 @@ public class SQLiteSettingsRepository extends SQLiteOpenHelper implements Databa
         }
 
         cursor.close();
+        db.close();
 
         return settingsData.getJSONObject(0);
     }

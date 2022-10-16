@@ -92,6 +92,7 @@ public class SQLiteNotificationRepository extends SQLiteOpenHelper implements Da
         }
 
         cursor.close();
+        db.close();
 
         return notificationData;
     }
@@ -122,6 +123,7 @@ public class SQLiteNotificationRepository extends SQLiteOpenHelper implements Da
         }
 
         cursor.close();
+        db.close();
 
         return notificationData.getJSONObject(0);
     }
@@ -152,6 +154,7 @@ public class SQLiteNotificationRepository extends SQLiteOpenHelper implements Da
         }
 
         cursor.close();
+        db.close();
 
         return notificationData.getJSONObject(0);
     }

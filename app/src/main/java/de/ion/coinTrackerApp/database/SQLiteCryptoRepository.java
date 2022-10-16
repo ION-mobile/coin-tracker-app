@@ -91,6 +91,7 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
         }
 
         cursor.close();
+        db.close();
 
         return cryptoData;
     }
@@ -121,6 +122,7 @@ public class SQLiteCryptoRepository extends SQLiteOpenHelper implements Database
         }
 
         cursor.close();
+        db.close();
 
         return cryptoData.getJSONObject(0);
     }
