@@ -2,7 +2,7 @@ package de.ion.coinTrackerApp.notification.entity;
 
 public class NotificationData {
     private String cryptoName;
-    private Double inputCryptoPrice;
+    private Integer inputCryptoPrice;
     private Integer inputCryptoLimit;
     private Boolean isWaitingForWarning;
 
@@ -12,7 +12,7 @@ public class NotificationData {
      * @param inputCryptoLimit
      * @param isWaitingForWarning
      */
-    public NotificationData(String cryptoName, Double inputCryptoPrice, Integer inputCryptoLimit, Boolean isWaitingForWarning) {
+    public NotificationData(String cryptoName, Integer inputCryptoPrice, Integer inputCryptoLimit, Boolean isWaitingForWarning) {
         this.cryptoName = cryptoName;
         this.inputCryptoPrice = inputCryptoPrice;
         this.inputCryptoLimit = inputCryptoLimit;
@@ -36,14 +36,14 @@ public class NotificationData {
     /**
      * @return inputCryptoPrice
      */
-    public Double getInputCryptoPrice() {
+    public Integer getInputCryptoPrice() {
         return this.inputCryptoPrice;
     }
 
     /**
      * @param inputCryptoPrice
      */
-    public void setInputCryptoPrice(Double inputCryptoPrice) {
+    public void setInputCryptoPrice(Integer inputCryptoPrice) {
         this.inputCryptoPrice = inputCryptoPrice;
     }
 

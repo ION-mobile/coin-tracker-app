@@ -41,9 +41,10 @@ public class MainActivity extends AppCompatActivity implements Activity {
             public void run() {
                 while (true) {
                     try {
+                        int cryptoInputPrice = notificationSingleton.getNotificationData().getInputCryptoPrice();
                         runOnUiThread(() -> {
                             currentPriceTxt.setText("Derzeitiger Stand: " + cryptoSingleton.getCryptoData().getCurrentCryptoPrice() + " $");
-                            inputPriceTxt.setText("Bitcoin Warnung: -/+ " + notificationSingleton.getNotificationData().getInputCryptoLimit() + " $");
+                            inputPriceTxt.setText("Bitcoin Warnung: " + cryptoInputPrice + " $ -/+ " + notificationSingleton.getNotificationData().getInputCryptoLimit() + " $");
                             currentFearAndGreedTxt.setText("Fear And Greed Index: " + cryptoSingleton.getCryptoData().getFearAndGreedIndex());
                         });
 

@@ -48,7 +48,7 @@ public class FearAndGreedIndexByApiAlternativeStringRequestProvider implements F
                     if (cryptoSingleton.getCryptoData() == null) {
                         CryptoData cryptoData = new CryptoData(
                                 "",
-                                0.0,
+                                0,
                                 fearAndGreedIndex.getFearAndGreedIndex());
                         cryptoSingleton.setCryptoData(cryptoData);
                     }

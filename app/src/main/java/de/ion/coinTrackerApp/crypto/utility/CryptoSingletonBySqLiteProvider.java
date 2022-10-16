@@ -33,13 +33,13 @@ public class CryptoSingletonBySqLiteProvider implements CryptoSingletonProvider 
             JSONArray cryptoJsonData = this.sqLiteCryptoRepository.fetchCryptoById("1");
             cryptoData = new CryptoData(
                     "",
-                    0.0,
+                    0,
                     0);
 
             if (cryptoJsonData.length() > 0) {
                 cryptoData = new CryptoData(
                         cryptoJsonData.getJSONObject(0).getString(SQLiteCryptoRepository.COL_CRYPTO_NAME),
-                        Double.parseDouble(cryptoJsonData.getJSONObject(0).getString(SQLiteCryptoRepository.COL_CURRENT_PRICE)),
+                        Integer.parseInt(cryptoJsonData.getJSONObject(0).getString(SQLiteCryptoRepository.COL_CURRENT_PRICE)),
                         Integer.parseInt(cryptoJsonData.getJSONObject(0).getString(SQLiteCryptoRepository.COL_FEAR_AND_GREED_INDEX)));
 
                 this.cryptoSingleton.setCryptoData(cryptoData);

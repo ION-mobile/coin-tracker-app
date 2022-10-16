@@ -15,7 +15,7 @@ public class NotificationResetter extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         NotificationSingleton notificationSingleton = NotificationSingleton.getInstance();
 
-        NotificationData notificationData = new NotificationData("", 0.0, 0, true);
+        NotificationData notificationData = new NotificationData("", 0, 0, true);
 
         notificationSingleton.setNotificationData(notificationData);
 

@@ -87,7 +87,7 @@ public class CryptoNotificationActivity extends AppCompatActivity implements Act
                 notificationData.setInputCryptoPrice(this.cryptoSingleton.getCryptoData().getCurrentCryptoPrice());
                 notificationData.setInputCryptoLimit(Integer.valueOf(this.inputCryptoPrice.getText().toString()));
             } else if (this.settingsSingleton.getSettingsData().getPriceOption().equals("Prozent")) {
-                double currentPrice = this.cryptoSingleton.getCryptoData().getCurrentCryptoPrice();
+                int currentPrice = this.cryptoSingleton.getCryptoData().getCurrentCryptoPrice();
                 double inputLimit = Double.parseDouble(this.inputCryptoPrice.getText().toString());
                 notificationData.setInputCryptoPrice(currentPrice);
                 notificationData.setInputCryptoLimit((int) (inputLimit / 100 * currentPrice));
@@ -110,7 +110,7 @@ public class CryptoNotificationActivity extends AppCompatActivity implements Act
 
     public void stopNewService(View view) {
         NotificationData notificationData = notificationSingleton.getNotificationData();
-        notificationData.setInputCryptoPrice(0.0);
+        notificationData.setInputCryptoPrice(0);
         notificationData.setInputCryptoLimit(0);
         notificationData.shouldWaitingForWarning(true);
 

@@ -32,14 +32,14 @@ public class NotificationSingletonBySqLiteProvider implements NotificationSingle
             JSONArray notificationJsonData = this.sqLiteNotificationRepository.fetchNotificationById("1");
             notificationData = new NotificationData(
                     "",
-                    0.0,
+                    0,
                     0,
                     true);
 
             if (notificationJsonData.length() > 0) {
                 notificationData = new NotificationData(
                         notificationJsonData.getJSONObject(0).getString(SQLiteNotificationRepository.COL_CRYPTO_NAME),
-                        Double.parseDouble(notificationJsonData.getJSONObject(0).getString(SQLiteNotificationRepository.COL_INPUT_PRICE)),
+                        Integer.parseInt(notificationJsonData.getJSONObject(0).getString(SQLiteNotificationRepository.COL_INPUT_PRICE)),
                         Integer.parseInt(notificationJsonData.getJSONObject(0).getString(SQLiteNotificationRepository.COL_INPUT_LIMIT)),
                         true);
 

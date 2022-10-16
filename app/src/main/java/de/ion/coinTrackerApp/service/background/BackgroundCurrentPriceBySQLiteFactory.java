@@ -25,11 +25,11 @@ public class BackgroundCurrentPriceBySQLiteFactory implements CurrentPriceFactor
         try {
             JSONObject currentPriceJsonData = this.databaseCryptoRepository.fetchCurrentPriceById("1");
             return new CurrentPrice(
-                    Double.parseDouble(currentPriceJsonData.getString(SQLiteCryptoRepository.COL_CURRENT_PRICE)));
+                    Integer.parseInt(currentPriceJsonData.getString(SQLiteCryptoRepository.COL_CURRENT_PRICE)));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return new CurrentPrice(0.0);
+        return new CurrentPrice(0);
     }
 }

@@ -57,7 +57,7 @@ public class ForegroundCryptoPriceByCryptoCompareStringRequestProvider implement
                     if (cryptoSingleton.getCryptoData() == null) {
                         CryptoData cryptoData = new CryptoData(
                                 CRYPTO_NAME,
-                                (double) currentPrice.getCryptoPrice(),
+                                currentPrice.getCryptoPrice(),
                                 cryptoSingleton.getCryptoData().getFearAndGreedIndex());
                         cryptoSingleton.setCryptoData(cryptoData);
                     }
@@ -65,7 +65,7 @@ public class ForegroundCryptoPriceByCryptoCompareStringRequestProvider implement
                     if (cryptoSingleton.getCryptoData() != null) {
                         CryptoData cryptoData = new CryptoData(
                                 CRYPTO_NAME,
-                                (double) currentPrice.getCryptoPrice(),
+                                currentPrice.getCryptoPrice(),
                                 cryptoSingleton.getCryptoData().getFearAndGreedIndex());
                         cryptoSingleton.setCryptoData(cryptoData);
                         this.databaseCryptoRepository.persist(

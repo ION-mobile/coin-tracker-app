@@ -14,7 +14,7 @@ public class NotificationSingletonPriceResetter implements NotificationSingleton
     public void reset() {
         NotificationData notificationData = this.notificationSingleton.getNotificationData();
         notificationData.setInputCryptoLimit(0);
-        notificationData.setInputCryptoPrice(0.0);
+        notificationData.setInputCryptoPrice(0);
         this.notificationSingleton.setNotificationData(notificationData);
     }
 }

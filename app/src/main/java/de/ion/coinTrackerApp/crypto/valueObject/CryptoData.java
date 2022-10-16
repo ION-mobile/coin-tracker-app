@@ -2,10 +2,10 @@ package de.ion.coinTrackerApp.crypto.valueObject;
 
 public class CryptoData {
     private final String cryptoName;
-    private final Double currentCryptoPrice;
+    private final Integer currentCryptoPrice;
     private final Integer fearAndGreedIndex;
 
-    public CryptoData(String cryptoName, Double currentCryptoPrice, Integer fearAndGreedIndex) {
+    public CryptoData(String cryptoName, Integer currentCryptoPrice, Integer fearAndGreedIndex) {
         this.cryptoName = cryptoName;
         this.currentCryptoPrice = currentCryptoPrice;
         this.fearAndGreedIndex = fearAndGreedIndex;
@@ -21,7 +21,7 @@ public class CryptoData {
     /**
      * @return currentCryptoPrice
      */
-    public Double getCurrentCryptoPrice() {
+    public Integer getCurrentCryptoPrice() {
         return this.currentCryptoPrice;
     }
 

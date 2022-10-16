@@ -1,19 +1,19 @@
 package de.ion.coinTrackerApp.service.background.valueObject;
 
 public class CurrentPrice {
-    private final double price;
+    private final Integer price;
 
     /**
      * @param price
      */
-    public CurrentPrice(double price) {
+    public CurrentPrice(Integer price) {
         this.price = price;
     }
 
     /**
      * @return price
      */
-    public double getCryptoPrice() {
+    public Integer getCryptoPrice() {
         return this.price;
     }
 }
