@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.background.valueObjects;
+package de.ion.coinTrackerApp.service.background.valueObject;
 
 public class InputPrice {
     private final double price;

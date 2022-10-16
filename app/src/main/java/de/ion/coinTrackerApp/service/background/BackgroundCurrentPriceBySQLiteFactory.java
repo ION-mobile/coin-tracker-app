@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import de.ion.coinTrackerApp.database.DatabaseCryptoRepository;
 import de.ion.coinTrackerApp.database.SQLiteCryptoRepository;
 import de.ion.coinTrackerApp.service.CurrentPriceFactory;
-import de.ion.coinTrackerApp.service.background.valueObjects.CurrentPrice;
+import de.ion.coinTrackerApp.service.background.valueObject.CurrentPrice;
 
 public class BackgroundCurrentPriceBySQLiteFactory implements CurrentPriceFactory {
     private final DatabaseCryptoRepository databaseCryptoRepository;

@@ -11,9 +11,9 @@ import de.ion.coinTrackerApp.service.InputLimitFactory;
 import de.ion.coinTrackerApp.service.InputPriceFactory;
 import de.ion.coinTrackerApp.service.PriceLimitFactory;
 import de.ion.coinTrackerApp.service.background.crypto.BackgroundCryptoApiDataCaller;
-import de.ion.coinTrackerApp.service.background.valueObjects.CurrentPrice;
-import de.ion.coinTrackerApp.service.background.valueObjects.InputLimit;
-import de.ion.coinTrackerApp.service.background.valueObjects.InputPrice;
+import de.ion.coinTrackerApp.service.background.valueObject.CurrentPrice;
+import de.ion.coinTrackerApp.service.background.valueObject.InputLimit;
+import de.ion.coinTrackerApp.service.background.valueObject.InputPrice;
 import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
 
 public class BackgroundCryptoAPIService implements CryptoAPIService {

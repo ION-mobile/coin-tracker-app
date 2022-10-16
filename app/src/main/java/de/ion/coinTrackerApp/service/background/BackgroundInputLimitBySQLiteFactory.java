@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import de.ion.coinTrackerApp.database.DatabaseNotificationRepository;
 import de.ion.coinTrackerApp.database.SQLiteNotificationRepository;
 import de.ion.coinTrackerApp.service.InputLimitFactory;
-import de.ion.coinTrackerApp.service.background.valueObjects.InputLimit;
+import de.ion.coinTrackerApp.service.background.valueObject.InputLimit;
 
 public class BackgroundInputLimitBySQLiteFactory implements InputLimitFactory {
     private final DatabaseNotificationRepository databaseNotificationRepository;

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import de.ion.coinTrackerApp.database.DatabaseNotificationRepository;
 import de.ion.coinTrackerApp.database.SQLiteNotificationRepository;
 import de.ion.coinTrackerApp.service.InputPriceFactory;
-import de.ion.coinTrackerApp.service.background.valueObjects.InputPrice;
+import de.ion.coinTrackerApp.service.background.valueObject.InputPrice;
 
 public class BackgroundInputPriceBySQLiteFactory implements InputPriceFactory {
     private final DatabaseNotificationRepository databaseNotificationRepository;

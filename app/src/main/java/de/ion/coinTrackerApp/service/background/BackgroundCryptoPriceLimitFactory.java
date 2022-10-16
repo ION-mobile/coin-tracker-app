@@ -1,8 +1,8 @@
 package de.ion.coinTrackerApp.service.background;
 
 import de.ion.coinTrackerApp.service.PriceLimitFactory;
-import de.ion.coinTrackerApp.service.background.valueObjects.InputLimit;
-import de.ion.coinTrackerApp.service.background.valueObjects.InputPrice;
+import de.ion.coinTrackerApp.service.background.valueObject.InputLimit;
+import de.ion.coinTrackerApp.service.background.valueObject.InputPrice;
 import de.ion.coinTrackerApp.service.valueObject.DipPrice;
 import de.ion.coinTrackerApp.service.valueObject.PriceLimit;
 import de.ion.coinTrackerApp.service.valueObject.PumpPrice;

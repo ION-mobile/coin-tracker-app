@@ -14,17 +14,11 @@ import com.android.volley.toolbox.Volley;
 
 import de.ion.coinTrackerApp.api.CryptoPriceByCryptoCompareFactory;
 import de.ion.coinTrackerApp.api.CryptoPriceFactory;
-import de.ion.coinTrackerApp.api.singleton.ApiSingleton;
-import de.ion.coinTrackerApp.api.singleton.CryptoApiSingleton;
 import de.ion.coinTrackerApp.api.valueObject.CryptoPrice;
-import de.ion.coinTrackerApp.crypto.singleton.CryptoDataSingleton;
-import de.ion.coinTrackerApp.crypto.singleton.CryptoSingleton;
 import de.ion.coinTrackerApp.crypto.valueObject.CryptoData;
 import de.ion.coinTrackerApp.database.DatabaseCryptoRepository;
 import de.ion.coinTrackerApp.database.SQLiteCryptoRepository;
-import de.ion.coinTrackerApp.error.singleton.ErrorSingleton;
-import de.ion.coinTrackerApp.error.singleton.StringRequestErrorSingleton;
-import de.ion.coinTrackerApp.service.background.valueObjects.CurrentPrice;
+import de.ion.coinTrackerApp.service.background.valueObject.CurrentPrice;
 
 public class BackgroundCryptoPriceByCryptoCompareStringRequestProvider implements CryptoPriceStringRequestProvider {
     private final Context context;
