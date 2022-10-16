@@ -59,12 +59,6 @@ public class BackgroundCryptoPriceByCryptoCompareStringRequestProvider implement
                                     CRYPTO_NAME,
                                     currentPrice.getCryptoPrice(),
                                     0));
-
-                    try {
-                        this.wait(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }, error -> {
             if (error instanceof NetworkError || error instanceof AuthFailureError ||
                     error instanceof TimeoutError) {
