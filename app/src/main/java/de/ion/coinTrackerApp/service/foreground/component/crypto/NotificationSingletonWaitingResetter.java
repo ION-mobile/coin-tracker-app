@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.foreground.crypto;
+package de.ion.coinTrackerApp.service.foreground.component.crypto;
 
 import de.ion.coinTrackerApp.notification.entity.NotificationData;
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;

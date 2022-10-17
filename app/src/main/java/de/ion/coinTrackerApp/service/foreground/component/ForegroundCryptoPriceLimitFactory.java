@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.foreground;
+package de.ion.coinTrackerApp.service.foreground.component;
 
 import de.ion.coinTrackerApp.notification.singleton.NotificationSingleton;
 import de.ion.coinTrackerApp.service.PriceLimitFactory;

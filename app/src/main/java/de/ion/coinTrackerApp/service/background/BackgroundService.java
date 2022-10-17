@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import de.ion.coinTrackerApp.service.CryptoAPIService;
+import de.ion.coinTrackerApp.service.background.component.crypto.BackgroundCryptoAPIService;
 
 public class BackgroundService extends Service {
     public BackgroundService() {

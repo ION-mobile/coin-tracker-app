@@ -1,10 +1,9 @@
-package de.ion.coinTrackerApp.service.background.crypto;
+package de.ion.coinTrackerApp.service.background.component.crypto;
 
 import android.content.Context;
 
 import de.ion.coinTrackerApp.api.v1.crypto.BackgroundCryptoPriceByCryptoCompareStringRequestProvider;
 import de.ion.coinTrackerApp.api.v1.crypto.CryptoPriceStringRequestProvider;
-import de.ion.coinTrackerApp.service.background.BackgroundApiDataCaller;
 
 public class BackgroundCryptoApiDataCaller implements BackgroundApiDataCaller {
     private final Context context;

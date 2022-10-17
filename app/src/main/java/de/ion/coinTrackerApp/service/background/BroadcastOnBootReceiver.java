@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import de.ion.coinTrackerApp.service.CryptoAPIService;
+import de.ion.coinTrackerApp.service.background.component.crypto.BackgroundCryptoAPIService;
 
 public class BroadcastOnBootReceiver extends BroadcastReceiver {
     @Override

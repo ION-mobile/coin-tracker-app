@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.background;
+package de.ion.coinTrackerApp.service.background.component.crypto;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.background;
+package de.ion.coinTrackerApp.service.background.component.crypto;
 
 import de.ion.coinTrackerApp.service.PriceLimitFactory;
 import de.ion.coinTrackerApp.service.background.valueObject.InputLimit;

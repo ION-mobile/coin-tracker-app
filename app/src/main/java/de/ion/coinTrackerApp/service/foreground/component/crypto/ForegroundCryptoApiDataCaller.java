@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.foreground.crypto;
+package de.ion.coinTrackerApp.service.foreground.component.crypto;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import de.ion.coinTrackerApp.api.singleton.CryptoApiSingleton;
 import de.ion.coinTrackerApp.api.v1.crypto.ForegroundCryptoPriceByCryptoCompareStringRequestProvider;
 import de.ion.coinTrackerApp.api.v1.crypto.CryptoPriceStringRequestProvider;
 import de.ion.coinTrackerApp.api.singleton.ApiSingleton;
-import de.ion.coinTrackerApp.service.foreground.ForegroundApiDataCaller;
+import de.ion.coinTrackerApp.service.foreground.component.ForegroundApiDataCaller;
 
 public class ForegroundCryptoApiDataCaller implements ForegroundApiDataCaller {
     private final Context context;

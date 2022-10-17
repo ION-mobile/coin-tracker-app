@@ -1,4 +1,4 @@
-package de.ion.coinTrackerApp.service.background;
+package de.ion.coinTrackerApp.service.background.component.crypto;
 
 import android.content.Context;
 
@@ -10,7 +10,6 @@ import de.ion.coinTrackerApp.service.CurrentPriceFactory;
 import de.ion.coinTrackerApp.service.InputLimitFactory;
 import de.ion.coinTrackerApp.service.InputPriceFactory;
 import de.ion.coinTrackerApp.service.PriceLimitFactory;
-import de.ion.coinTrackerApp.service.background.crypto.BackgroundCryptoApiDataCaller;
 import de.ion.coinTrackerApp.service.background.valueObject.CurrentPrice;
 import de.ion.coinTrackerApp.service.background.valueObject.InputLimit;
 import de.ion.coinTrackerApp.service.background.valueObject.InputPrice;
