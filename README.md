@@ -1,8 +1,15 @@
-## Coin Tracker 💰
+## Coin Tracker 💸
 Coin Tracker app is a crypto price warning tool, to stay updated.
 
-## Tech stack and whys 🏗
+
+## Play store 🏪
+You can Install and test latest Coin Tracker app from below 👇
+[![DocuBox](https://www.freepnglogos.com/pics/play-store-logo)](https://github.com/ION-mobile/coin-tracker-app/milestone/1)
+
+## Tools ⚒️
 * [Volley](https://google.github.io/volley/) - this tool is for handling api requests
+* [Crypto-Compare](https://min-api.cryptocompare.com/) - this api possess information about the bitcoin price
+* [Alternative.me](https://api.alternative.me/) - this api possess information about the fear and greed index
 
 ## Screenshots 📷
 <img src="/store/images/loading.png" width="260"> &emsp;<img src="/store/images/main.png" width="260"> &emsp;<img src="/store/images/settings.png" width="260">
@@ -10,8 +17,8 @@ Coin Tracker app is a crypto price warning tool, to stay updated.
 ## Contribution 🙌
 All contributions are welcome! Feel free to jump to the issues and pick one for yourself! Please write a comment inside of the issue before you start working.
 
-## Contributors 👏
+## Contributors 👻
 * [aria-gholami](https://github.com/aria-gholami)
 
-## Credits 🙏
-* Thanks to [Max Hausdörfer] for the having the idea
+## Credits 🫶
+* Thanks to [Max Hausdörfer] for having the idea
