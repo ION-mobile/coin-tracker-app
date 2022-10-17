@@ -7,7 +7,7 @@ import de.ion.coinTrackerApp.api.v1.crypto.CryptoPriceStringRequestProvider;
 
 public class BackgroundCryptoApiDataCaller implements BackgroundApiDataCaller {
     private final Context context;
-    private CryptoPriceStringRequestProvider backgroundCryptoPriceByCompareStrngRequestProvider;
+    private final CryptoPriceStringRequestProvider backgroundCryptoPriceByCompareStrngRequestProvider;
 
     /**
      * @param context

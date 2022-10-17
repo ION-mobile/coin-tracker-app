@@ -7,7 +7,7 @@ import de.ion.coinTrackerApp.settings.singleton.SettingsSingleton;
 import de.ion.coinTrackerApp.settings.valueObject.SettingsData;
 
 public class PriceOptionSpinner implements AdapterView.OnItemSelectedListener {
-    private SettingsSingleton settingsSingleton;
+    private final SettingsSingleton settingsSingleton;
 
     public PriceOptionSpinner() {
         this.settingsSingleton = SettingsSingleton.getInstance();
