@@ -1,14 +1,17 @@
-Coin Tracker
-===========
+## Coin Tracker 💰
+Coin Tracker app is a crypto price warning tool, to stay updated.
 
-Coin Tracker App einrichten
---------------
-**1.) Projekt auschecken**
-```
-$ git clone git@github.com:ION-mobile/coin-tracker-app.git
-```
-**2.) Projekt mit Android Studio öffnen**
-```
-Installiere Android Studio hier -> https://developer.android.com/studio/
-```
-**3.) Projekt mit Android Studio starten**
+## Tech stack and whys 🏗
+* [Volley](https://google.github.io/volley/) - this tool is for handling api requests
+
+## Screenshots 📷
+<img src="/store/loading.png" width="260"> &emsp;<img src="/store/main.png" width="260"> &emsp;<img src="/store/settings.png" width="260">
+
+## Contribution 🙌
+All contributions are welcome! Feel free to jump to the issues and pick one for yourself! Please write a comment inside of the issue before you start working.
+
+## Contributors 👏
+* [aria-gholami](https://github.com/aria-gholami)
+
+## Credits 🙏
+* Thanks to [Max Hausdörfer] for the having the idea
