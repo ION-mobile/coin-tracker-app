@@ -68,7 +68,7 @@ public class BackgroundCryptoPriceByCryptoCompareStringRequestProvider implement
         queue.add(stringCryptoRequest);
 
         try {
-            Thread.sleep(300);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
