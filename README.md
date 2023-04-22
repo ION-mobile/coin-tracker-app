@@ -22,4 +22,4 @@ All contributions are welcome! Feel free to jump to the issues and pick one for 
 * [aria-gholami](https://github.com/aria-gholami)
 
 ## Credits 🫶
-* Thanks to [Max Hausdörfer] for having the idea
+* Thanks to a friend for having the idea
