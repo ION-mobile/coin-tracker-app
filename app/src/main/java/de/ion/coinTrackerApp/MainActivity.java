@@ -1,5 +1,6 @@
 package de.ion.coinTrackerApp;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -122,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements Activity {
         this.toolbarOptions.setVisibility(View.VISIBLE);
     }
 
+    public void requestAndroidPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(new String[] { Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
+    }
     @Override
     public void init() {
         loadViews();
@@ -129,5 +135,6 @@ public class MainActivity extends AppCompatActivity implements Activity {
         initDatabase();
         initSingleton();
         initToolbar();
+        requestAndroidPermissions();
     }
 }
