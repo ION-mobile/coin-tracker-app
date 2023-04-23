@@ -1,16 +1,19 @@
 package de.ion.coinTrackerApp.notification.broadcast;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -66,6 +69,8 @@ public class CryptoDipBroadcastReminder extends BroadcastReceiver {
 
         Notification notification = builder.build();
         notification.flags |= Notification.FLAG_NO_CLEAR;
-        notificationManager.notify(1, notification);
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify(1, notification);
+        }
     }
 }
